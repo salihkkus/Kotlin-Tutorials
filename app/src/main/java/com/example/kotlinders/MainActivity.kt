@@ -45,10 +45,58 @@ class MainActivity : AppCompatActivity() {
         {
             println(benimInt * 2)
         }
-    }
 
-    fun testFonksiyonu()
-    {
+        // OOP
+
+        var esma = Sanatci(isim = "esma", yas = 7, enstruman = "gitar")
+        println(esma.isim)
+        esma.isim = "esmabetul"
+        println(esma.isim)
+
+        esma.sarkiSoyle()
+
+
+        //Encapsulation - kapsülleme
+
+      //  esma.cinsiyet = "erkek"  hata verir çünkü private tanımladık
+        esma.cinsiyetYazdir()
+
+        // esma.gozRengi = "siyah" hata verir çünkü set private tanımladık
+        println(esma.gozRengi)
+
+
+
+        // Inheritance - Kalıtım Miras
+        var hero = Kahraman("superman","ucmak")
+        println(hero.isim)
+        println(hero.yetenek)
+
+        val muhtesemHero = SuperKahraman("batman", "zengin olmak")
+        muhtesemHero.kos()
+
+
+        // Polymorphism - çok biçimlilik
+
+        //statik polymorphism
+        var islem = Islemler()
+        println(islem.cikarma(2,3,4,5))
+        println(islem.cikarma(2,3))
+        println(islem.cikarma(2,3,4))
+
+        //dinamik polymorphism
+        var kedi = hayvan()
+        var kopek = kopek()
+
+        val ornekDizi = arrayOf(kedi,kopek)
+        ornekDizi.forEach { it.sesCikar() }
+
+
+        //Abstraction - Soyutlama
+
+        //var insan = Insan()  abstract sınıftan nesne uretemeyiz
+
+
+
 
     }
 }
