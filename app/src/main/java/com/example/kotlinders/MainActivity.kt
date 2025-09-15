@@ -27,10 +27,9 @@ class MainActivity : AppCompatActivity() {
         println(salih.yas)
 
 
-
         //nullability
 
-        var benimInt : Int? = null
+        var benimInt: Int? = null
 
         //elvis operator - eğer soldaki değer null gelirse sağdaki değeri atar
         println(benimInt ?: 10)
@@ -41,8 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //diger yontem
-        if(benimInt != null)
-        {
+        if (benimInt != null) {
             println(benimInt * 2)
         }
 
@@ -58,16 +56,15 @@ class MainActivity : AppCompatActivity() {
 
         //Encapsulation - kapsülleme
 
-      //  esma.cinsiyet = "erkek"  hata verir çünkü private tanımladık
+        //  esma.cinsiyet = "erkek"  hata verir çünkü private tanımladık
         esma.cinsiyetYazdir()
 
         // esma.gozRengi = "siyah" hata verir çünkü set private tanımladık
         println(esma.gozRengi)
 
 
-
         // Inheritance - Kalıtım Miras
-        var hero = Kahraman("superman","ucmak")
+        var hero = Kahraman("superman", "ucmak")
         println(hero.isim)
         println(hero.yetenek)
 
@@ -79,15 +76,15 @@ class MainActivity : AppCompatActivity() {
 
         //statik polymorphism
         var islem = Islemler()
-        println(islem.cikarma(2,3,4,5))
-        println(islem.cikarma(2,3))
-        println(islem.cikarma(2,3,4))
+        println(islem.cikarma(2, 3, 4, 5))
+        println(islem.cikarma(2, 3))
+        println(islem.cikarma(2, 3, 4))
 
         //dinamik polymorphism
         var kedi = hayvan()
         var kopek = kopek()
 
-        val ornekDizi = arrayOf(kedi,kopek)
+        val ornekDizi = arrayOf(kedi, kopek)
         ornekDizi.forEach { it.sesCikar() }
 
 
@@ -96,31 +93,25 @@ class MainActivity : AppCompatActivity() {
         //var insan = Insan()  abstract sınıftan nesne uretemeyiz
 
 
-
-
-
-
-
-
         println("-------------------------------------İleri Seviye Kotlin-------------------------------------------")
 
         // Lambda
 
-        val yazdigimiYazdir = {a : Int, b : Int -> println(a * b)}
-        yazdigimiYazdir(2,3)
+        val yazdigimiYazdir = { a: Int, b: Int -> println(a * b) }
+        yazdigimiYazdir(2, 3)
 
-        val carpmaLambda = {a : Int, b : Int -> a * b}
-        println(carpmaLambda(2,3))
+        val carpmaLambda = { a: Int, b: Int -> a * b }
+        println(carpmaLambda(2, 3))
 
-        val carpmaLambdaV2 : (Int,Int) -> Int = {a,b -> a * b}
-        println(carpmaLambdaV2(2,3))
+        val carpmaLambdaV2: (Int, Int) -> Int = { a, b -> a * b }
+        println(carpmaLambdaV2(2, 3))
 
 
         // High Order Function
 
         //Filter
 
-        val benimListem = arrayListOf(1,2,3,4,5,6)
+        val benimListem = arrayListOf(1, 2, 3, 4, 5, 6)
 
         var yeniListe = benimListem.filter { it < 5 }
         yeniListe.forEach { println(it) }
@@ -137,9 +128,9 @@ class MainActivity : AppCompatActivity() {
         benimListem.forEach { println(it) }
 
 
-        val sanatci1 = Sanatci("esma",50,"gitar")
-        val sanatci2 = Sanatci("kerem",40,"saksofon")
-        val sanatci3 = Sanatci("ahmet",30,"mandol")
+        val sanatci1 = Sanatci("esma", 50, "gitar")
+        val sanatci2 = Sanatci("kerem", 40, "saksofon")
+        val sanatci3 = Sanatci("ahmet", 30, "mandol")
 
         val sanatciListem = arrayListOf<Sanatci>(sanatci1, sanatci2, sanatci3)
 
@@ -147,46 +138,76 @@ class MainActivity : AppCompatActivity() {
         sanatcilar.forEach { println(it) }
 
 
-
         // Scope Fonksiyonları
 
         //let
-        var benimIntegerim : Int? = null
+        var benimIntegerim: Int? = null
         benimIntegerim = 5
         benimIntegerim?.let {
             println(it * 2)
         }
 
-        val yeniInteger = benimIntegerim?.let {it + 1} ?: 10
+        val yeniInteger = benimIntegerim?.let { it + 1 } ?: 10
         println(benimIntegerim)
 
 
         //also
 
-        sanatciListem.filter { it.yas < 20 }. also { it.forEach { println(it.isim) } }
-
+        sanatciListem.filter { it.yas < 20 }.also { it.forEach { println(it.isim) } }
 
 
         // Hata Ayıklama       try-catch
 
-        fun intOrNullFonksiyonu (str : String) : Int?
-        {
+        fun intOrNullFonksiyonu(str: String): Int? {
             try {
                 val numara = str.toInt()
                 return numara
-            }
-            catch (e : Exception)
-            {
+            } catch (e: Exception) {
                 e.printStackTrace()
-            }
-
-            catch (e : NullPointerException)
-            {
+            } catch (e: NullPointerException) {
                 e.printStackTrace()
             }
 
             return null
         }
 
+
+        /*
+        1) Calisanlar sinifi olusturulacak
+        2) Calısanların isim, maas, departman, yaş bilgilerini tutacağız
+        3) Örnek 10 tane calısan alusturun, bir listede bu calısanlar toplanacak (MainActivity icinde yapabilirsiniz) (yazılım,
+        4) İsim bilgileri sadece okunabilir alacak. calisan. isim = "sdfld" değisiklik yapılamayacak
+        5) Maas bilgileri okunabilir de olmayacak, yazılabilir de olmayacak. Sadece maasGoster denilen bir fonksivonla okunabilecek
+        Bu fonksiyan icerisine aldığı objenin maasinı gösterecek.
+        6) MainActivity icerisinde -> yası 30'dan büyük olan ve departmanı yazılım olan kisilerin maaslarını tutan bir liste yap
+        7) MainActivity icerisinde -> yası 25'den küçük glan kisilerin sadece isimlerini tutan bir liste vapmanız yeterli olur.
+         */
+
+
+
+
+
+            val calisan1 = Calisanlar("kerem", 20000, "muhasebe", 20)
+            val calisan2 = Calisanlar("ahmet", 30000, "muhendislik", 30)
+            val calisan3 = Calisanlar("esma", 40000, "muhendislik", 40)
+            val calisan4 = Calisanlar("salih", 50000, "muhendislik", 50)
+            val calisan5 = Calisanlar("ali", 60000, "muhendislik", 60)
+            val calisan6 = Calisanlar("veli", 70000, "muhendislik", 70)
+            val calisan7 = Calisanlar("mehmet", 80000, "muhendislik", 80)
+            val calisan8 = Calisanlar("kemal", 50000, "memur", 50)
+            val calisan9 = Calisanlar("ahmet2", 60000, "memur", 60)
+            val calisan10 = Calisanlar("bedir", 70000, "memur", 70)
+
+
+            val calisanlar = arrayListOf(calisan1, calisan2, calisan3, calisan4, calisan5, calisan6, calisan7, calisan8, calisan9, calisan10)
+
+
+            val buyukMuhendisMaasListesi = calisanlar.filter { it.yas > 30 && it.departman == "muhendislik" }.map { it.maasGoster() }
+            buyukMuhendisMaasListesi.forEach { println(it) }
+
+
+            val kucuklerIsimListesi = calisanlar.filter { it.yas < 25 }.map { it.isim }
+            println(kucuklerIsimListesi)
+
+        }
     }
-}
