@@ -98,5 +98,72 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
+
+
+        println("-------------------------------------İleri Seviye Kotlin-------------------------------------------")
+
+        // Lambda
+
+        val yazdigimiYazdir = {a : Int, b : Int -> println(a * b)}
+        yazdigimiYazdir(2,3)
+
+        val carpmaLambda = {a : Int, b : Int -> a * b}
+        println(carpmaLambda(2,3))
+
+        val carpmaLambdaV2 : (Int,Int) -> Int = {a,b -> a * b}
+        println(carpmaLambdaV2(2,3))
+
+
+        // High Order Function
+
+        //Filter
+
+        val benimListem = arrayListOf(1,2,3,4,5,6)
+
+        var yeniListe = benimListem.filter { it < 5 }
+        yeniListe.forEach { println(it) }
+
+
+        //Map
+
+        val karesiniAl = benimListem.map { it * it }
+        karesiniAl.forEach { println(it) }
+
+        //Map&Filter
+
+        val mapfilter = benimListem.filter { it < 5 }.map { it * it }
+        benimListem.forEach { println(it) }
+
+
+        val sanatci1 = Sanatci("esma",50,"gitar")
+        val sanatci2 = Sanatci("kerem",40,"saksofon")
+        val sanatci3 = Sanatci("ahmet",30,"mandol")
+
+        val sanatciListem = arrayListOf<Sanatci>(sanatci1, sanatci2, sanatci3)
+
+        var sanatcilar = sanatciListem.filter { it.yas > 40 }.map { it.isim }
+        sanatcilar.forEach { println(it) }
+
+
+
+        // Scope Fonksiyonları
+
+        //let
+        var benimIntegerim : Int? = null
+        benimIntegerim = 5
+        benimIntegerim?.let {
+            println(it * 2)
+        }
+
+        val yeniInteger = benimIntegerim?.let {it + 1} ?: 10
+        println(benimIntegerim)
+
+
+        //also
+
+        sanatciListem.filter { it.yas < 20 }. also { it.forEach { println(it.isim) } }
+
     }
 }
