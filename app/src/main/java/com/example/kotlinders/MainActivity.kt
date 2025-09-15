@@ -165,5 +165,28 @@ class MainActivity : AppCompatActivity() {
 
         sanatciListem.filter { it.yas < 20 }. also { it.forEach { println(it.isim) } }
 
+
+
+        // Hata Ayıklama       try-catch
+
+        fun intOrNullFonksiyonu (str : String) : Int?
+        {
+            try {
+                val numara = str.toInt()
+                return numara
+            }
+            catch (e : Exception)
+            {
+                e.printStackTrace()
+            }
+
+            catch (e : NullPointerException)
+            {
+                e.printStackTrace()
+            }
+
+            return null
+        }
+
     }
 }
